@@ -64,7 +64,7 @@
                     <div class="">
                         <div class="custom-block-icon-wrap">
                             <div class="section-overlay"></div>
-                            <a href="detail-page.html" class="custom-block-image-wrap">
+                            <a href="#" class="custom-block-image-wrap">
                                 <img src="{% static 'core/images/podcast/11683425_4790593.jpg' %}"
                                     class="custom-block-image img-fluid" alt="">
                             </a>
@@ -92,7 +92,7 @@
                         </div>
 
                         <h5 class="mb-2">
-                            <a href="detail-page.html">
+                            <a href="#">
                                 {{ episodio.titulo }}
                             </a>
                         </h5>
@@ -140,13 +140,13 @@
                     </div>
 
                     <div class="d-flex flex-column ms-auto">
-                        <a href="#" class="badge ms-auto">
+                        <a href="{% url 'update_episodios' episodio.id %}" class="badge ms-auto">
                             <i class="bi-pencil-square"></i>
                         </a>
-
-                        <a href="#" class="badge ms-auto">
+                        <a href="{% url 'delete_episodios' episodio.id %}" class="badge">
                             <i class="bi-trash"></i>
                         </a>
+                   
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ function Confirm_Delete(id) {
                 text: "Se ha eliminado.",
                 icon: "success"
             }).then(() => {
-                window.location.href = "delete/" + id;
+                window.location.href = "eliminar/" + id;
             });
 
         }
