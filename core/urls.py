@@ -1,7 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+#API
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('persona', PersonaViewSet)
+router.register('episodio', EpisodioViewSet)
 
 urlpatterns = [
+    path('api/', include(router.urls)),
+    path('lista/', listarEmpleadosAPI, name="listarEmpleadosAPI"),
     path('', index, name="index"),
     path('add', add, name="add"),
     path('update/<id>', update, name="update"),

@@ -1,8 +1,50 @@
 from django.shortcuts import render, redirect, get_object_or_404  # type: ignore
 from .models import *
 from .forms import *
+from rest_framework import viewsets, filters
+from .serializers import *
 
-# Create your views here.
+from rest_framework.renderers import JSONRenderer
+# Create your views he
+from django_filters.rest_framework import DjangoFilterBackend
+import requests
+#VIESEt
+
+class PersonaViewSet(viewsets.ModelViewSet):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['ocupacion','verificado']
+    search_fields = ['nombre','whatsapp']
+    renderer_classes=[JSONRenderer]
+
+    
+class EpisodioViewSet(viewsets.ModelViewSet):
+    queryset = Episodio.objects.all()
+    serializer_class = EpisodioSerializer
+    renderer_classes=[JSONRenderer]
+    
+    
+def listarEmpleadosAPI(request):
+    response = requests.get("http://127.0.0.1:8000/api/persona/")
+    repo = requests.get("http://127.0.0.1:8000/api/episodio/")
+    
+    if response.status_code == 200:
+        persona = response.json()  
+    else:
+        persona = []
+        
+    if repo.status_code == 200:
+        episodio = repo.json()  
+    else:
+        episodio = []
+        
+    datos = {
+        'listapersonas': persona,
+        'listaepisodios': episodio
+    }
+        
+    return render(request, 'core/persona/listar.html',datos)
 
 
 def index(request):

@@ -1,0 +1,152 @@
+{% extends 'core/base.html' %} 
+{% load static %} 
+{% block principal %} 
+<br><br><br>
+<div class="owl-carousel owl-theme">
+    {% for persona in listapersonas %}
+
+    <div class="owl-carousel-info-wrap item">
+        {% if persona.avatar %}
+        <img src="{{persona.avatar}}" class="owl-carousel-image img-fluid" alt="">
+                      {% else %}
+        <img src="" alt="" width="100" height="100">
+                      {% endif %}
+
+
+        <div class="owl-carousel-info">
+            <h4 class="mb-2">
+                {{ persona.nombre }}
+                {% if persona.verificado %}
+                <img src="{% static 'core/images/verified.png' %}" class="owl-carousel-verified-image img-fluid"
+                    alt="">
+                {% else %}
+                <img src="" class="owl-carousel-verified-image img-fluid">
+                {% endif %}
+            </h4>
+
+            <span class="badge">{{ persona.ocupacion }}</span>
+
+        </div>
+
+        <div class="social-refresh">
+            <ul class="social-icon">
+                <li class="social-icon-item">
+                    <a href="{% url 'update' persona.id %}" class="social-icon-link bi-edit" title="Editar">
+                        <i class="bi bi-pencil"></i> <!-- Ícono de edición -->
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block episodios %}
+
+<section class="latest-podcast-section section-padding pb-0" id="section_2">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-12 col-12">
+                <div class="section-title-wrap mb-5">
+                    <h4 class="section-title">Lista de episodios</h4>
+                </div>
+            </div>
+            {% for episodio in listaepisodios %}
+            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
+                <div class="custom-block d-flex">
+                    <div class="">
+                        <div class="custom-block-icon-wrap">
+                            <div class="section-overlay"></div>
+                            <a href="#" class="custom-block-image-wrap">
+                                <img src="{% static 'core/images/podcast/11683425_4790593.jpg' %}"
+                                    class="custom-block-image img-fluid" alt="">
+                            </a>
+                        </div>
+
+                        <div class="mt-2">
+                            <a href="#" class="btn custom-btn">
+                                Subscribe
+                            </a>
+                        </div>
+                    </div>
+                 
+                    <td>
+        
+                    </td>  
+             
+                    <div class="custom-block-info">
+                        <div class="custom-block-top d-flex mb-1">
+                            <small class="me-4">
+                                <i class="bi-clock-fill custom-icon"></i>
+                                {{ episodio.duracion }}
+                            </small>
+
+                            <small>Episode <span class="badge"> {{ episodio.numero }}</span></small>
+                        </div>
+
+                        <h5 class="mb-2">
+                            <a href="#">
+                                {{ episodio.titulo }}
+                            </a>
+                        </h5>
+
+                        <div class="profile-block d-flex">
+                            {% if  episodio.anfitrion.avatar %}
+                            <img src="{{episodio.anfitrion.avatar}}" class="profile-block-image img-fluid" alt="">
+                                          {% else %}
+                            <img src="" alt="" width="100" class="profile-block-image img-fluid" height="100">
+                                          {% endif %}
+
+                            <p>
+                                {{ episodio.anfitrion.nombre }}
+
+                                {% if episodio.anfitrion.verificado %}
+                                <img src="{% static 'core/images/verified.png' %}" class="verified-image img-fluid" alt="">
+                                {% else %}
+                                <img src="" class="verified-image img-fluid">
+                                {% endif %}
+                              
+
+                                <strong>{{ episodio.anfitrion.ocupacion }} </strong>
+                            </p>
+                        </div>
+
+                        <p class="mb-0">   {{ episodio.descripcion }}</p>
+
+                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
+                            <a href="#" class="bi-headphones me-1">
+                                <span>{{ episodio.suscriptores }}</span>
+                            </a>
+
+                            <a href="#" class="bi-heart me-1">
+                                <span>{{ episodio.likes }}</span>
+                            </a>
+
+                            <a href="#" class="bi-chat me-1">
+                                <span>{{ episodio.comentarios }}</span>
+                            </a>
+
+                            <a href="#" class="bi-download">
+                                <span>50k</span>
+                            </a>
+                        </div>
+                    </div>
+
+                
+                </div>
+            </div>
+            {% endfor%}
+
+          
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
